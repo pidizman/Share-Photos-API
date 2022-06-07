@@ -1,8 +1,25 @@
 {
-  "name": "Photo-Sharer-API",
+  "name": "photo-sharer-api",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/pidizman/Share-Photos",
+  "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pidizman/Share-Photos.git"
+  },
   "author": "Filipos",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^10.7.0",
+    "ts-node-dev": "^1.1.8"
+  },
+  "bugs": {
+    "url": "https://github.com/pidizman/Share-Photos/issues"
+  },
+  "homepage": "https://github.com/pidizman/Share-Photos#readme",
+  "devDependencies": {},
+  "scripts": {
+    "test": "ts-node src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "description": ""
 }
