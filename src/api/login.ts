@@ -1,5 +1,7 @@
 import {Request, Response} from "express";
 import {hash} from "argon2";
+import {create} from "njwt";
+import secureRandom from "secure-random";
 import {checkIfPasswordCorrect} from "../utility/checkIfPasswordCorrect.ts";
 import {checkIfMailCorrect} from "../utility/checkIfMailCorrect.ts";
 
@@ -17,6 +19,8 @@ export const Login = async (req: Request, res: Response) => {
       error: e.message
     });
   };
+
+  const 
 
   res.json({
     data: "All be OK!"
