@@ -6,6 +6,7 @@ import {checkIfPasswordCorrect} from "../utility/checkIfPasswordCorrect.ts";
 import {checkIfMailCorrect} from "../utility/checkIfMailCorrect.ts";
 
 export const Login = async (req: Request, res: Response) => {
+  const name = req.body.name;
   const mail = req.body.mail;
   const password = req.body.password;
   const hashPass = await hash("test");
@@ -14,16 +15,20 @@ export const Login = async (req: Request, res: Response) => {
     checkIfMailCorrect(mail);
     await checkIfPasswordCorrect(hashPass, password);
   }catch(e){
+    res.status(404);
     return res.json({
       data: "null",
       error: e.message
     });
   };
 
-  const 
+  const signingKey = secureRandom(256, {type: "Buffer"});
+  const token = create(name,signingKey).compact();
 
+  res.status(200);
   res.json({
-    data: "All be OK!"
-  })
+    data: "Logined!",
+    token: token
+  });
   
 };
