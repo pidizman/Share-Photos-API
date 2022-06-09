@@ -29,7 +29,7 @@ export const Login = async (req: Request, res: Response) => {
   const token = create(name,signingKey).compact();
   db.set(`${name}_token`, token);
 
-  //console.log(`Key: ${idk}\nToken: ${db.get(`${name}_token`)}`); been used only for test if db work
+  console.log(`Key: ${db.get(`${name}_signingKey`)}\nToken: ${db.get(`${name}_token`)}`); //been used only for test if db work
 
   res.status(200);
   res.json({
