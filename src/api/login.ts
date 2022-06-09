@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import {hash} from "argon2";
 import {create} from "njwt";
+import db from "quick.db";
 import secureRandom from "secure-random";
 import {checkIfPasswordCorrect} from "../utility/checkIfPasswordCorrect.ts";
 import {checkIfMailCorrect} from "../utility/checkIfMailCorrect.ts";
@@ -23,7 +24,12 @@ export const Login = async (req: Request, res: Response) => {
   };
 
   const signingKey = secureRandom(256, {type: "Buffer"});
+  db.set(`${name}_signingKey`, signingKey);
+  
   const token = create(name,signingKey).compact();
+  db.set(`${name}_token`, token);
+
+  //console.log(`Key: ${idk}\nToken: ${db.get(`${name}_token`)}`); been used only for test if db work
 
   res.status(200);
   res.json({
