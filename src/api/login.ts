@@ -24,9 +24,11 @@ export const Login = async (req: Request, res: Response) => {
   };
 
   const signingKey = secureRandom(256, {type: "Buffer"});
+  db.delete(`${name}_signingKey`);
   db.set(`${name}_signingKey`, signingKey);
   
-  const token = create(name,signingKey).compact();
+  const token = create(name,signingKey).compact();  
+  db.delete(`${name}_token`);
   db.set(`${name}_token`, token);
 
   console.log(`Key: ${db.get(`${name}_signingKey`)}\nToken: ${db.get(`${name}_token`)}`); //been used only for test if db work
