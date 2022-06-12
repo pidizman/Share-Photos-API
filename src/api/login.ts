@@ -1,19 +1,15 @@
 import {Request, Response} from "express";
 import {hash} from "argon2";
-import {create} from "njwt";
 import db from "quick.db";
-import secureRandom from "secure-random";
-import {checkIfPasswordCorrect} from "../utility/checkIfPasswordCorrect.ts";
-import {checkIfMailCorrect} from "../utility/checkIfMailCorrect.ts";
+import { checkIfPasswordCorrect, checkIfNameCorrect, createToken } from "../utility";
 
 export const Login = async (req: Request, res: Response) => {
   const name = req.body.name;
-  const mail = req.body.mail;
   const password = req.body.password;
-  const hashPass = await hash("test");
+  const hashPass = db.get(`${name}_password`);
   
   try{
-    checkIfMailCorrect(mail);
+    checkIfNameCorrect(name, "login");
     await checkIfPasswordCorrect(hashPass, password);
   }catch(e){
     res.status(404);
@@ -23,15 +19,9 @@ export const Login = async (req: Request, res: Response) => {
     });
   };
 
-  const signingKey = secureRandom(256, {type: "Buffer"});
-  db.delete(`${name}_signingKey`);
-  db.set(`${name}_signingKey`, signingKey);
-  
-  const token = create(name,signingKey).compact();  
-  db.delete(`${name}_token`);
-  db.set(`${name}_token`, token);
+  const token = createToken(name);
 
-  console.log(`Key: ${db.get(`${name}_signingKey`)}\nToken: ${db.get(`${name}_token`)}`); //been used only for test if db work
+  //console.log(`Key: ${db.get(`${name}_signingKey`)}\nToken: ${db.get(`${name}_token`)}`); //been used only for test if db work
 
   res.status(200);
   res.json({

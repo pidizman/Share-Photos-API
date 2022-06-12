@@ -1,5 +1,6 @@
 import Express from "express";
 import {Login} from "./api/login.ts";
+import {Register} from "./api/register.ts";
 import bodyParser from "body-parser"
 
 const app = Express();
@@ -12,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/v1/login", Login);
+app.post("/api/v1/register", Register);
 
 app.listen(PORT, () => {
   console.log(`Server ready on https://localhost:${PORT}/`);
