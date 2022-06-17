@@ -20,11 +20,13 @@ export const Register = async (req: Request, res: Response) => {
   db.set(`${name}_name`, name);
   db.set(`${name}_password`, password);
   const token = createToken(name);
+  console.log(token);
 
   res.status(200);
   res.json({
     data: "Registred!",
-    token: token
+    token: token,
+    name: name
   });
   //console.log(mail,"\n",name,"\n",password);
 };
