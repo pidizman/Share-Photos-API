@@ -1,3 +1,5 @@
+// Tohle je taky hotové!
+
 import {Request, Response} from "express";
 import {hash} from "argon2";
 import db from "quick.db";
@@ -20,7 +22,7 @@ export const Register = async (req: Request, res: Response) => {
   db.set(`${name}_name`, name);
   db.set(`${name}_password`, password);
   const token = createToken(name);
-  console.log(token);
+  //console.log(token);
 
   res.status(200);
   res.json({

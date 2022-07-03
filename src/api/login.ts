@@ -1,3 +1,5 @@
+// Tohle je hotové!
+
 import {Request, Response} from "express";
 import {hash} from "argon2";
 import db from "quick.db";
