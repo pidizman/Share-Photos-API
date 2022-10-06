@@ -1,7 +1,5 @@
-// Do tohodle nešahat!
-
 import {Request,Response} from "express";
-import {checkToken} from "../utility";
+import {checkToken,loadGalleries} from "../utility";
 
 export const Home = (req: Request, res: Response) => {
   const name = req.body.name;
@@ -9,7 +7,19 @@ export const Home = (req: Request, res: Response) => {
 
   try {
     checkToken(name,token);
+    var galleries = loadGalleries(name);
   } catch (e) {
-    console.log(e);
-  }
+    res.status(404)
+    return res.json({
+      data: "null",
+      error: e.message
+    });
+  };
+  console.log("x");
+
+  res.status(200)
+  res.json({
+    data: `${name} galleries and lists!`,
+    galleries: galleries
+  });
 };

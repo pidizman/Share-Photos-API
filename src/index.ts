@@ -1,7 +1,5 @@
 import Express from "express";
-import {Login} from "./api/login.ts";
-import {Register} from "./api/register.ts";
-import {Home} from "./api/home.ts";
+import {Login,Register,Home} from "./api";
 import bodyParser from "body-parser";
 
 const app = Express();
