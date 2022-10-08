@@ -1,5 +1,5 @@
 import Express from "express";
-import {Login,Register,Home} from "./api";
+import {Login,Register,Home,CreateGallery} from "./api";
 import bodyParser from "body-parser";
 
 const app = Express();
@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 app.post("/api/v1/login", Login);
 app.post("/api/v1/register", Register);
 app.post("/api/v1/home", Home);
+app.post("/api/v1/createGallery", CreateGallery);
 
 app.listen(PORT, () => {
   console.log(`Server ready on https://localhost:${PORT}/`);

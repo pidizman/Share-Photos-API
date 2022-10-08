@@ -19,6 +19,7 @@ export const Register = async (req: Request, res: Response) => {
   
   db.set(`${name}_name`, name);
   db.set(`${name}_password`, password);
+  db.set(`${name}_galleries`,[]);
   const token = createToken(name);
   //console.log(token);
 
